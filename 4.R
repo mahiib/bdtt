@@ -1,18 +1,18 @@
-df <- airquality
-dim(df)
-sapply(df,class)
+aq = data.frame(airquality)
+dim(aq)
+
+sapply(aq, class)
+
+sum(is.na(aq))
 
 print("The Missing values are as follows")
-xcolNames <- colnames(df)
-x<- colSums(is.na(df))
-print(x)
-which(is.na(df))
-sum(is.na(df))
-df1<- as.data.frame(df)
-print(df1)
+mean = colMeans(aq, na.rm = TRUE)
 
-for(i in 1:4)
-  df1[,i]<- ifelse ( is.na(df[,i]), mean(df[,i], na.rm = TRUE), df[,i])
+for (i in 1:nrow(aq)) 
+    for (j in 1:ncol(aq)) 
+        if (is.na(aq[i,j]))
+            aq[i,j] = mean[j]
 
-df2<-na.omit(df)
-print(df2)
+aq2 = data.frame(airquality)
+na.omit(aq2)
+dim(aq2)
