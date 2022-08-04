@@ -1,32 +1,18 @@
 data()
-head(mtcars)
 
-rownum <- nrow(mtcars)
-print(rownum)
-colnum <- ncol(mtcars)
-print(colnum)
+data("mtcars")
+View(mtcars)
+nrow(mtcars)
+ncol(mtcars)
 
-x<- data.frame(mtcars)
+print(sum(mtcars$am))
+ifelse(sum(mtcars$am)>nrow(mtcars)/2, "more automatic", "more manual")
 
-automatic <-0 
-manual <-0
+scatter.smooth(mtcars$hp, mtcars$wt)
 
-for (i in 1:rownum)
-  ifelse( x[i,9] == 1, automatic <- automatic + 1, manual <- manual +1)
-ifelse (automatic > manual,
-        print("There are more automatic transmission type"),
-        print("There are more manual transmission type"))
+newmtc = transform(mtcars, am = as.integer(am), cyl = as.integer(cyl), vs = as.integer(vs))
 
-HorsePower <- x[,4]
-Weight <- x[,6]
-scatter.smooth(HorsePower,Weight, span=2/3, degree = 1, family =c("symmetric","gaussian"))
+mtcars[(mtcars$cyl < 5),]
+count=0
 
-x[,2]<- as.integer(x[,2])
-x[,8]<- as.integer(x[,8])
-x[,9]<- as.integer(x[,9])
 
-newmtc <- data.frame(x)
-print(newmtc)
-
-z <- subset(newmtc, cyl<5)
-print(z)
